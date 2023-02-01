@@ -1,0 +1,32 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  DisabledByDefault: false
+  NewCops: enable
+  TargetRubyVersion: 3.0.3
+  SuggestExtensions: false
+  Exclude:
+    - 'node_modules/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/{rails,rake}'
+    - 'spec/cypress/**/*'
+
+Style/WordArray:
+  EnforcedStyle: brackets
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/RedundantReturn:
+  Enabled: false
+
+Metrics/MethodLength:
+  CountAsOne: ['array', 'hash', 'heredoc']
+  IgnoredMethods: ['cli_arg_version']
