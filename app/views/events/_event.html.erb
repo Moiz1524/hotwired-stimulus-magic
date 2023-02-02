@@ -1,7 +1,14 @@
-<div id="<%= dom_id event %>">
-  <p>
-    <strong>Name:</strong>
-    <%= event.name %>
-  </p>
+<%= turbo_frame_tag(dom_id(event)) do %>
+  <div>
+    <p>
+      <strong>Name:</strong>
+      <%= event.name %>
+    </p>
 
-</div>
+    <div>
+      <%= button_to("Likes (#{event.likes_count})", event_likes_path(event)) %>
+      <%= link_to('Edit', edit_event_path(event)) %>
+    </div>
+
+  </div>
+<% end %>
