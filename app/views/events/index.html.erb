@@ -2,18 +2,26 @@
 
 <h1>Events</h1>
 
-<div id="events">
-  <% @events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "Show this event", event %>
-    </p>
-  <% end %>
-</div>
+<%= turbo_stream_from('events') %>
+<%= turbo_frame_tag('events') do %>
+  <div id="events">
+    <% @events.each do |event| %>
+      <%= render event %>
+    <% end %>
+  </div>
+<% end %> 
 
-<%= link_to "New event", new_event_path %>
 
-<div data-controller="hello">
+<h1>New event</h1>
+
+<%= turbo_frame_tag('event_form') do %>
+  <%= render "form", event: @event %>
+<% end %>
+
+<br>
+
+
+<!-- <div data-controller="hello">
   <input data-hello-target="name" type="text" data-action="paste->hello#paste">
   <button data-action="click->hello#log">Log</button>
-</div>
+</div> -->
