@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
+    @event = Event.new
   end
 
   # GET /events/1 or /events/1.json
@@ -25,9 +26,10 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
+        format.html { redirect_to events_url, notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
+        format.turbo_stream { render(turbo_stream: turbo_stream.replace(@event, partial: 'events/form', locals: { event: @event })) }
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end

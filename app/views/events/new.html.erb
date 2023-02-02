@@ -1,6 +1,8 @@
 <h1>New event</h1>
 
-<%= render "form", event: @event %>
+<%= turbo_frame_tag('event_form') do %>
+  <%= render "form", event: @event %>
+<% end %>
 
 <br>
 
